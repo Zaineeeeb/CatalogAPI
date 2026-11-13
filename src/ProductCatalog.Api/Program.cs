@@ -29,14 +29,14 @@ timestamp = DateTime.UtcNow }))
 // 2. Endpoints (listing des produits et ajout d’un produit)
 app.MapGet("/api/products", async (AppDbContext db) =>
 await db.Products.AsNoTracking().ToListAsync())
-.WithName("GetAllProducts");
+.WithName("GetAllProductsV2");
 app.MapPost("/api/products", async (Product product, AppDbContext
 db) =>
 {
 db.Products.Add(product);
 await db.SaveChangesAsync();
 return Results.Created($"/api/products/{product.Id}", product);
-}).WithName("CreateProduct");
+}).WithName("CreateProductV2");
 
 app.MapGet("/api/get-product/{id:int}", async (int id, AppDbContext db) =>
 {
